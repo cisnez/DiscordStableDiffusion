@@ -10,7 +10,7 @@ _init_botname.yaml
 _init__global.yaml
 
 ## Usage
-Requirements to run Stable Diffusion using Python and Nvidia CUDA.
+### Requirements to run Stable Diffusion using Python and Nvidia CUDA.
 1. CUDA drivers
 https://developer.nvidia.com/cuda-downloads
 2. PyTorch with CUDA
