@@ -3,21 +3,17 @@ import logging
 # Set logging.DEBUG to see ALL logs; set logging.INFO for less
 logging.basicConfig(level=logging.INFO)
 
-import re
-import string
-import random
 import asyncio
+import emoji  # convert Unicode emojis to their corresponding shortcodes.
+from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
 import discord as DisCord
 from discord.ext import commands as commANDs
 from discord import Intents as InTeNTs
-
 from PIL import Image
-from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
+import random
+import re
+import string
 import torch
-
-from io import BytesIO
-from pathlib import Path
-import emoji  # convert Unicode emojis to their corresponding shortcodes.
 
 class D15C0R6(commANDs.Bot):
     def __init__(self, openai_api_key, discord_token, bot_init_data, bot_name):
@@ -130,7 +126,6 @@ class D15C0R6(commANDs.Bot):
             prompt = message.content[5:].strip()
             prompt = self.unicode_to_shortcode(prompt)
             full_prompt = f'{self.prePrompt} {prompt} {self.postPrompt}'
-            # full_prompt = f'{prompt}'
             logging.info(f'.art prompt:\n{prompt}\n')
             logging.info(f'.art (full prompt):\n{full_prompt}\n')
             seed, guidance_scale, steps, full_prompt, image_path = self.generate_image(full_prompt)
@@ -141,20 +136,16 @@ class D15C0R6(commANDs.Bot):
                 # Create the discord.File object using output_file
                 image_file = DisCord.File(image_path)
                 logging.info(f"File prepared for sending: {image_path}")
-
             except Exception as e:
                 self.image_generation_in_progress = False
-                logging.error(f"Error occurred while preparing the image: {e}")
+                logging.error(f"Error occurred while preparing or sending the image: {e}")
                 # You might want to re-raise the exception after logging it, 
                 # especially if the subsequent code relies on the success of the previous code
                 raise
-            # Create the message content
             # Send the image file to the channel
-            # content = f'``seed: {seed}\nscale: {guidance_scale} | steps: {steps}``\n``{prompt}``'
             await message.channel.send(file=image_file)
+            # Drop the image generating flag
             self.image_generation_in_progress = False
-            # await message.channel.send(file=image_file, content=content)
-
 
         elif message.author.id in self.allow_author_ids:
             logging.info('message from VIP')

@@ -1,11 +1,13 @@
 # _init_jaya.yaml
 command_prefix: "~"
 username: "JayaByrd"
-sd_model: "pirsusEpicRealismV40.safetensors"
-prePrompt: 'JayaByrd-KPHISTYLE :phæomelanin: coppertone illustration :UTAH ZEF: blanca-trenzas'
-postPrompt: 'Octane_render, cinematic_masterpiece :dof:'
-negPrompt: 'low quality, deformed anatomy, jpeg artifacts, blurry, censored, UI elements, textual elements'
-maxCLIPtokens: 77
+intents:
+  typing: true
+  presences: true
+  messages: true
+  guilds: true
+  members: false
+  message_content: true
 ignored_prefixes:
   - "rpg"
 bot_channel_id: 1088511652619632670
@@ -22,10 +24,8 @@ allow_channel_ids:
  - 
 allow_author_ids:
  - 
-intents:
-  typing: true
-  presences: true
-  messages: true
-  guilds: true
-  members: false
-  message_content: true
+sd_model: "pirsusEpicRealismV40.safetensors"
+prePrompt: 'JayaByrd-KPHISTYLE :phæomelanin: coppertone illustration :UTAH ZEF: blanca-trenzas'
+postPrompt: 'Octane_render, cinematic_masterpiece :dof:'
+negPrompt: 'low quality, deformed anatomy, jpeg artifacts, blurry, censored, UI elements, textual elements'
+maxCLIPtokens: 77
